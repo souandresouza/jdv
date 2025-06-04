@@ -42,3 +42,18 @@ celulas.forEach(c => c.addEventListener('click', handleClick));
 reiniciarBtn.addEventListener('click', reiniciarJogo);
 
 status.textContent = 'Turno do jogador X';
+
+function aplicarTemaPorHorario() {
+      const hora = new Date().getHours();
+      // Ativa dark-mode das 18h até 23h59 e 0h até 5h59
+      if (hora >= 18 || hora < 6) {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
+    }
+
+    aplicarTemaPorHorario();
+
+    // Opcional: atualizar o tema a cada 5 minutos para mudanças dinâmicas
+    setInterval(aplicarTemaPorHorario, 5 * 60 * 1000);
