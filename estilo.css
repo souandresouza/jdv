@@ -28,3 +28,15 @@ body, html {
     cursor: pointer;
     user-select: none;
   }  
+
+/* Tema claro padrão */
+  body {
+    background-color: #ffffff;
+    color: #222222;
+    transition: background-color 0.5s, color 0.5s;
+  }
+  /* Tema escuro */
+  body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
