@@ -1,8 +1,10 @@
 const celulas = document.querySelectorAll('[data-celula]');
 const status = document.getElementById('status');
 const reiniciarBtn = document.getElementById('reiniciar');
+
 let turnoX = true;
 let jogoAtivo = true;
+
 const combinacoesVitoria = [
   [0,1,2], [3,4,5], [6,7,8],
   [0,3,6], [1,4,7], [2,5,8],
@@ -12,7 +14,9 @@ const combinacoesVitoria = [
 function handleClick(e) {
   const celula = e.target;
   if (!jogoAtivo || celula.textContent !== '') return;
+  
   celula.textContent = turnoX ? 'X' : 'O';
+  
   if (verificarVitoria(turnoX ? 'X' : 'O')) {
     status.textContent = `Jogador ${turnoX ? 'X' : 'O'} venceu!`;
     jogoAtivo = false;
@@ -38,22 +42,20 @@ function reiniciarJogo() {
   status.textContent = 'Turno do jogador X';
 }
 
+function aplicarTemaPorHorario() {
+  const hora = new Date().getHours();
+  if (hora >= 18 || hora < 6) {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
+}
+
+// Inicializações
 celulas.forEach(c => c.addEventListener('click', handleClick));
 reiniciarBtn.addEventListener('click', reiniciarJogo);
-
 status.textContent = 'Turno do jogador X';
+aplicarTemaPorHorario();
 
-function aplicarTemaPorHorario() {
-      const hora = new Date().getHours();
-      // Ativa dark-mode das 18h até 23h59 e 0h até 5h59
-      if (hora >= 18 || hora < 6) {
-        document.body.classList.add('dark-mode');
-      } else {
-        document.body.classList.remove('dark-mode');
-      }
-    }
-
-    aplicarTemaPorHorario();
-
-    // Opcional: atualizar o tema a cada 5 minutos para mudanças dinâmicas
-    setInterval(aplicarTemaPorHorario, 5 * 60 * 1000);
+// Atualiza o tema a cada 5 minutos para mudanças dinâmicas
+setInterval(aplicarTemaPorHorario, 5 * 60 * 1000);
